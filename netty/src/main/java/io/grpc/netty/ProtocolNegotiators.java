@@ -611,17 +611,21 @@ final class ProtocolNegotiators {
         SslHandshakeCompletionEvent handshakeEvent = (SslHandshakeCompletionEvent) evt;
         if (handshakeEvent.isSuccess()) {
           SslHandler handler = ctx.pipeline().get(SslHandler.class);
+          /*
           if (sslContext.applicationProtocolNegotiator().protocols()
               .contains(handler.applicationProtocol())) {
             // Successfully negotiated the protocol.
-            logSslEngineDetails(Level.FINER, ctx, "TLS negotiation succeeded.", null);
-            propagateTlsComplete(ctx, handler.engine().getSession());
+           */
+          logSslEngineDetails(Level.FINER, ctx, "TLS negotiation succeeded.", null);
+          propagateTlsComplete(ctx, handler.engine().getSession());
+            /*
           } else {
             Exception ex =
                 unavailableException("Failed ALPN negotiation: Unable to find compatible protocol");
             logSslEngineDetails(Level.FINE, ctx, "TLS negotiation failed.", ex);
             ctx.fireExceptionCaught(ex);
           }
+           */
         } else {
           Throwable t = handshakeEvent.cause();
           if (t instanceof ClosedChannelException) {
